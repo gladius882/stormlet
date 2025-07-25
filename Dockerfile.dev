@@ -1,0 +1,17 @@
+# Wybór obrazu bazowego
+FROM node:20
+
+# Ustawiamy katalog roboczy
+WORKDIR /app
+
+# Kopiujemy package.json i lockfile
+COPY package*.json ./
+
+# Instalujemy zależności
+RUN npm install
+
+# Kopiujemy resztę plików
+COPY . .
+
+# Komenda startowa
+CMD ["npm", "run", "dev"]
