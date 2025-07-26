@@ -17,7 +17,7 @@ export default function Home() {
       <h1>Elo 3</h1>
 
       <div>
-        {JSON.stringify(containers)}
+        {JSON.stringify(containers[0])}
       </div>
     </div>
   );
