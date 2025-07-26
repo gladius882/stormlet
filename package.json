@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "@types/dockerode": "^3.3.42",
+    "bcrypt": "^6.0.0",
     "dockerode": "^4.0.7",
     "next": "15.4.4",
     "next-auth": "^4.24.11",
