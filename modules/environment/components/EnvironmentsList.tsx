@@ -4,6 +4,7 @@ import { Button, Card, SpeedDial } from "@mui/material"
 import { EnvironmentType } from "../types"
 import Link from "next/link"
 import { Add, Cloud, Key } from "@mui/icons-material"
+import { redirect } from "next/navigation"
 
 type EnvironmentsListProps = {
     items: EnvironmentType[]
@@ -22,8 +23,13 @@ export default function (props: EnvironmentsListProps) {
                 }}
                 icon={<Add />}
                 color="success"
+                FabProps={{
+                    sx: {
+                        bgcolor: 'green'
+                    }
+                }}
                 onClick={() => {
-                    alert('add')
+                    redirect('/environments/add');
                 }}
             >
             </SpeedDial>
