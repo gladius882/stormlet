@@ -26,7 +26,7 @@ export default function () {
                 {envs.length === 0 && <option key={0} value="0">NO ENVIRONMENT</option>}
                 {envs.map(e => {
                     return (
-                        <option value={e.id}>{e.name}</option>
+                        <option key={e.id} value={e.id}>{e.name}</option>
                     )
                 })}
             </select>
