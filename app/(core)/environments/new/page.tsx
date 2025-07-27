@@ -1,0 +1,95 @@
+"use client"
+
+import EnvironmentConnectionTypeSelector from "@/modules/environment/components/EnvironmentConnectionTypeSelector";
+import { Api, Save } from "@mui/icons-material";
+import { Box, Button, Card, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
+import { Fragment, useState } from "react";
+
+export default function () {
+
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set<number>())
+
+    const handleNext = () => {
+        let newSkipped = skipped;
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    return (
+        <div className="w-full h-full flex flex-col items-center gap-5">
+
+            <div className="w-[80%] flex flex-col gap-5 py-10">
+
+                <div className="w-full">
+                    <h1 className="w-full text-3xl">Add new environment</h1>
+                </div>
+
+                <div>
+
+                    <Stepper activeStep={activeStep}>
+
+                        <Step>
+                            <StepLabel>Connection type</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>Config</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>Confirm</StepLabel>
+                        </Step>
+                    </Stepper>
+
+                    {activeStep === 0 && <EnvironmentConnectionTypeSelector />}
+
+                    {activeStep === 1 && (
+                        <Fragment>
+                            <div className="grid grid-cols-2 pt-10">
+
+                                <div>Name</div>
+                                <TextField />
+
+                            </div>
+
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Button
+                                    color="inherit"
+                                    onClick={handleBack}
+                                    sx={{ mr: 1 }}
+                                >
+                                    Back
+                                </Button>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleNext}>
+                                    Next
+                                </Button>
+                            </Box>
+                            
+                        </Fragment>
+                    )}
+
+                    {activeStep === 3 && (
+                        <Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                                All steps completed - you&apos;re finished
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleReset} variant="outlined" color="success">Finish</Button>
+                            </Box>
+                        </Fragment>
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
