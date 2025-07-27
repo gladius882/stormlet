@@ -23,7 +23,7 @@ export default function () {
         <div className="flex gap-2 items-center min-w-[240px]">
             <div>ENV:</div>
             <select className="bg-emerald-300 h-full w-full text-gray-900 rounded-sm p-2">
-                {envs.length === 0 && <option value="0">NO ENVIRONMENT</option>}
+                {envs.length === 0 && <option key={0} value="0">NO ENVIRONMENT</option>}
                 {envs.map(e => {
                     return (
                         <option value={e.id}>{e.name}</option>
