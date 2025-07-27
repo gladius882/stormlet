@@ -8,6 +8,7 @@ import Popper from "@mui/material/Popper";
 import Button from "@mui/material/Button";
 import { useRef, useState } from "react";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper } from "@mui/material";
+import { signOut } from "next-auth/react";
 
 export default function Dashboard() {
 
@@ -114,7 +115,11 @@ export default function Dashboard() {
                                             >
                                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                                                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                                <MenuItem onClick={() => {
+                                                    signOut({
+                                                        redirect: true
+                                                    })
+                                                }}>Logout</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
