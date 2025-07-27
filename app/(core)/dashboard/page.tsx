@@ -1,8 +1,40 @@
+"use client"
+
 import logo from "@/images/logo-transparent.png"
 import Image from "next/image"
 import Link from "next/link"
+import DirectionsBoatFilledOutlinedIcon from '@mui/icons-material/DirectionsBoatFilledOutlined';
+import Popper from "@mui/material/Popper";
+import Button from "@mui/material/Button";
+import { useRef, useState } from "react";
+import { ClickAwayListener, Grow, MenuItem, MenuList, Paper } from "@mui/material";
 
 export default function Dashboard() {
+
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef<HTMLButtonElement>(null);
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    }
+
+    const handleClose = (event: Event | React.SyntheticEvent) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+            return;
+        }
+
+        setOpen(false);
+    }
+
+    function handleListKeyDown(event: React.KeyboardEvent) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        } else if (event.key === 'Escape') {
+            setOpen(false);
+        }
+    }
+
     return (
         <div className="flex min-w-[100vh]">
             <nav className="w-[280px] flex flex-col bg-emerald-600 px-5 h-full gap-3">
@@ -46,7 +78,49 @@ export default function Dashboard() {
                     </div>
 
                     <div className="item">
-                        admin
+                        <Button
+                            id="account-menu"
+                            ref={anchorRef}
+                            aria-controls={open ? 'composition-menu' : undefined}
+                            aria-expanded={open ? 'true' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggle}
+                        >
+                            admin
+                        </Button>
+                        <Popper
+                            open={open}
+                            anchorEl={anchorRef.current}
+                            role={undefined}
+                            placement="bottom-start"
+                            transition
+                            disablePortal
+                        >
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{
+                                        transformOrigin:
+                                            placement === 'bottom-start' ? 'left top' : 'left bottom',
+                                    }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleClose}>
+                                            <MenuList
+                                                autoFocusItem={open}
+                                                id="composition-menu"
+                                                aria-labelledby="composition-button"
+                                                onKeyDown={handleListKeyDown}
+                                            >
+                                                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                                <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
                     </div>
                 </div>
 
