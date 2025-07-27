@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/images/logo-transparent.png"
+import { Divider } from "@mui/material";
 
 export default function () {
     return (
@@ -10,23 +11,26 @@ export default function () {
                 <Image width={180} src={logo} alt="" />
             </div>
 
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+            <Link href="/dashboard" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
                 Dashboard
             </Link>
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+            <Link href="/containers" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
                 Containers
             </Link>
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+            <Link href="/images" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
                 Images
             </Link>
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+            <Link href="/volumes" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
                 Volumes
             </Link>
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+            <Link href="/networks" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
                 Networks
             </Link>
-            <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
-                Dashboard
+
+            <Divider></Divider>
+
+            <Link href="/environments" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
+                Environments
             </Link>
         </nav>
     )
