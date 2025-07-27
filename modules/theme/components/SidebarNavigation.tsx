@@ -8,7 +8,6 @@ export default function () {
         <nav className="w-[350px] flex flex-col bg-emerald-600 px-5 h-full gap-3">
             <div className="self-center mb-10">
                 <Image width={180} src={logo} alt="" />
-
             </div>
 
             <Link href="/" className="text-gray-900 bg-emerald-300 rounded-full p-2 font-bold text-center">
