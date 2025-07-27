@@ -1,6 +1,6 @@
 "use client"
 
-import { Api, Save } from "@mui/icons-material"
+import { Api, LockOutline, Save } from "@mui/icons-material"
 import { Box, Button, Card } from "@mui/material"
 import { Fragment } from "react"
 
@@ -39,7 +39,7 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
                 </Card>
 
                 <Card className="w-1/3 flex flex-col gap-5 items-center py-5">
-                    <Api fontSize="large" />
+                    <LockOutline fontSize="large" />
                     <div className="text-center text-xl">
                         Secure API
                     </div>
