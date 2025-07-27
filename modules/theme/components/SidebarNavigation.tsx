@@ -5,7 +5,7 @@ import logo from "@/images/logo-transparent.png"
 
 export default function () {
     return (
-        <nav className="w-[350px] flex flex-col bg-emerald-600 px-5 gap-3">
+        <nav className="w-[350px] flex flex-col bg-emerald-600 px-5 gap-3 py-5">
             <div className="self-center mb-10">
                 <Image width={180} src={logo} alt="" />
             </div>
