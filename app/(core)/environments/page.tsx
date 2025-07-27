@@ -2,8 +2,8 @@ import { ApiIcon } from "@/icons";
 import { listEnvironments } from "@/modules/environment/lib/environment"
 import { EnvironmentType } from "@/modules/environment/types";
 import NoEnvironmentsMessage from "@/modules/theme/components/NoEnvironmentsMessage";
-import { Key, Lock } from "@mui/icons-material";
-import { Breadcrumbs, Button, Card } from "@mui/material";
+import { Add, Key } from "@mui/icons-material";
+import { Button, Card, SpeedDial, SpeedDialAction } from "@mui/material";
 import Link from "next/link";
 
 export default async function () {
@@ -20,6 +20,18 @@ export default async function () {
 
     return (
         <div className="w-full h-full flex flex-col items-center gap-5">
+
+            <SpeedDial
+                ariaLabel="Environments speed dial"
+                sx={{
+                    position: 'absolute',
+                    bottom: 16,
+                    right: 16,
+                }}
+                icon={<Add />}
+                color="success"
+            >
+            </SpeedDial>
 
             <div className="w-[80%] flex flex-col gap-5 py-10">
 
