@@ -1,7 +1,7 @@
 import { ApiIcon } from "@/icons";
 import { listEnvironments } from "@/modules/environment/lib/environment"
 import { EnvironmentType } from "@/modules/environment/types";
-import NoEnvironmentsMessage from "@/modules/theme/components/NoEnvironmentsMessage";
+import NoEnvironmentsMessage from "@/modules/environment/components/NoEnvironmentsMessage";
 import { Add, Key } from "@mui/icons-material";
 import { Button, Card, SpeedDial, SpeedDialAction } from "@mui/material";
 import Link from "next/link";

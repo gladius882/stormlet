@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 
 import { DockerWarningIcon } from "@/icons";
-import NoEnvironmentsMessage from "@/modules/theme/components/NoEnvironmentsMessage";
+import NoEnvironmentsMessage from "@/modules/environment/components/NoEnvironmentsMessage";
 
 export default async function Dashboard() {
 
