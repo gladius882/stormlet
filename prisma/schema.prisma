@@ -21,3 +21,16 @@ model User {
   password String
   email String
 }
+
+model Environment {
+  id Int @id @default(autoincrement())
+  name String
+  socket String?
+  host String?
+  port Int?
+  protocol String?
+  ca String?
+  cert String?
+  key String?
+  version String?
+}
