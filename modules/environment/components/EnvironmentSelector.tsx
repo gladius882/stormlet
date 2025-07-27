@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react";
 import { listEnvironments } from "../lib/environment"
 import { EnvironmentType } from "../types";
