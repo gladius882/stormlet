@@ -1,10 +1,9 @@
-import SidebarNavigation from "@/modules/theme/components/SidebarNavigation";
-import EnvironmentSelector from "@/modules/environment/components/EnvironmentSelector";
-import UserDropdown from "@/modules/profile/components/UserDropdown";
 import { listEnvironments } from "@/modules/environment/lib/environment";
 import { EnvironmentType } from "@/modules/environment/types";
 import { Button } from "@mui/material";
 import Link from "next/link";
+
+import { DockerWarningIcon } from "@/icons";
 
 export default async function Dashboard() {
 
@@ -14,10 +13,15 @@ export default async function Dashboard() {
         <div className="w-full h-full">
             {envs.length === 0 && (
                 <div className="w-full h-full flex justify-center items-center">
-                    <div className="text-center">
-                        <div className="text-xl mb-3">
+                    <div className="text-center flex flex-col gap-5">
+                        <div className="flex justify-center">
+                            <DockerWarningIcon width={200} height={140} className="fill-emerald-600"/>
+                        </div>
+
+                        <div className="text-xl">
                             There is no environemnt defined
                         </div>
+
                         <Link href="/environments/new">
                             <Button size="large" variant="outlined" color="success">
                                 Add your first environment
