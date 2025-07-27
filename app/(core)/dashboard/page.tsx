@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper } from "@mui/material";
 import { signOut } from "next-auth/react";
 import SidebarNavigation from "@/modules/theme/components/SidebarNavigation";
+import EnvironmentSelector from "@/modules/environment/components/EnvironmentSelector";
 
 export default function Dashboard() {
 
@@ -41,15 +42,7 @@ export default function Dashboard() {
 
                 <div className="sticky bg-emerald-800 text-gray-50 flex items-center justify-between px-5">
 
-                    <div className="flex gap-2 items-center">
-                        <div>ENV:</div>
-                        <select className="bg-emerald-300 h-full text-gray-900 rounded-sm p-2">
-                            <option>NO ENVIRONMENT</option>
-                            <option>local</option>
-                            <option>proxmox</option>
-                            <option>orangepi</option>
-                        </select>
-                    </div>
+                    <EnvironmentSelector />
 
                     <div className="item">
                         <Button
