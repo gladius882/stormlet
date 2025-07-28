@@ -14,8 +14,6 @@ export default function Layout({
             <div className="flex flex-col w-full">
 
                 <div className="sticky bg-emerald-800 text-gray-50 flex items-center justify-between px-5">
-
-                    <EnvironmentSelector />
                     <UserDropdown />
                 </div>
 
