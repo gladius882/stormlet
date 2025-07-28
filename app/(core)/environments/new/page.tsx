@@ -5,10 +5,28 @@ import { Api, Save } from "@mui/icons-material";
 import { Box, Button, Card, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
+type NewEnvironmentData = {
+    type: "socket" | "api" | "secure-api",
+    name: string,
+    socket?: string,
+    host?: string,
+    port?: number,
+    protocol?: "http" | "https",
+    ca?: string,
+    cert?: string,
+    key?: string,
+    version?: string
+}
+
 export default function () {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set<number>())
+
+    const [data, setData] = useState<NewEnvironmentData>({
+        type: "socket",
+        name: "",
+    });
 
     const handleNext = () => {
         let newSkipped = skipped;
@@ -49,7 +67,13 @@ export default function () {
                         </Step>
                     </Stepper>
 
-                    {activeStep === 0 && <EnvironmentConnectionTypeSelector />}
+                    {activeStep === 0 && <EnvironmentConnectionTypeSelector onNext={(type) => {
+                        setData({
+                            ...data,
+                            type
+                        })
+                        setActiveStep(1);
+                    }}/>}
 
                     {activeStep === 1 && (
                         <Fragment>

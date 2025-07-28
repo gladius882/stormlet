@@ -5,7 +5,7 @@ import { Box, Button, Card } from "@mui/material"
 import { ChangeEvent, Fragment, useState } from "react"
 
 type EnvironmentConnectionTypeSelectorProps = {
-    onNext?: () => void,
+    onNext?: (type: "socket" | "api" | "secure-api") => void,
 }
 
 export default function (props: EnvironmentConnectionTypeSelectorProps) {
@@ -90,7 +90,7 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={() => {
-                    props.onNext?.();
+                    props.onNext?.(type);
                 }}>
                     Next
                 </Button>
