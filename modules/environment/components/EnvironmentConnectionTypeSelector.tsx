@@ -2,14 +2,16 @@
 
 import { Api, LockOutline, Save } from "@mui/icons-material"
 import { Box, Button, Card } from "@mui/material"
-import { Fragment } from "react"
+import { ChangeEvent, Fragment, useState } from "react"
 
 type EnvironmentConnectionTypeSelectorProps = {
     onNext?: () => void,
-
 }
 
 export default function (props: EnvironmentConnectionTypeSelectorProps) {
+
+    const [type, setType] = useState<"socket" | "api" | "secure-api">("socket");
+
     return (
         <Fragment>
 
@@ -23,7 +25,16 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
                     <div className="text-gray-800">
                         Specify path to docker.sock
                     </div>
-                    <input type="radio" name="env_type" className="accent-emerald-300 w-[20px] h-[20px] flex-" />
+                    <input
+                        checked={type == "socket"} type="radio" 
+                        value="socket" name="env_type" 
+                        className="accent-emerald-300 w-[20px] h-[20px] flex-" 
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            if(event.target.checked) {
+                                setType("socket")
+                            }
+                        }}
+                    />
                 </Card>
 
                 <Card className="w-1/3 flex flex-col gap-5 items-center py-5">
@@ -35,7 +46,16 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
                     <div className="text-gray-800">
                         Use TCP API to manage remote docker instance
                     </div>
-                    <input type="radio" name="env_type" className="accent-emerald-300 w-[20px] h-[20px]" />
+                    <input 
+                        checked={type == "api"} type="radio" 
+                        value="api" name="env_type" 
+                        className="accent-emerald-300 w-[20px] h-[20px]" 
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            if(event.target.checked) {
+                                setType("api")
+                            }
+                        }}
+                    />
                 </Card>
 
                 <Card className="w-1/3 flex flex-col gap-5 items-center py-5">
@@ -47,7 +67,16 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
                     <div className="text-gray-800 text-center">
                         Use TCP API to manage remote docker instance with TLS encryption
                     </div>
-                    <input type="radio" value="encrypted" name="env_type" className="accent-emerald-300 w-[20px] h-[20px]" />
+                    <input 
+                        checked={type == "secure-api"} type="radio" 
+                        value="secure-api" name="env_type" 
+                        className="accent-emerald-300 w-[20px] h-[20px]" 
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            if(event.target.checked) {
+                                setType("secure-api")
+                            }
+                        }}
+                    />
                 </Card>
 
             </div>
