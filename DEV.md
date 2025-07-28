@@ -10,7 +10,6 @@
 
 ```bash
 npm install
-npx prisma init
-npx prisma migrate dev --name init
+npx prisma migrate dev
 npx auth secret
 ```
