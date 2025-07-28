@@ -1,5 +1,6 @@
 "use client"
 
+import EnvironmentApiStep from "@/modules/environment/components/EnvironmentApiStep";
 import EnvironmentConnectionTypeSelector from "@/modules/environment/components/EnvironmentConnectionTypeSelector";
 import { Api, Save } from "@mui/icons-material";
 import { Box, Button, Card, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
@@ -73,14 +74,13 @@ export default function () {
                             type
                         })
                         setActiveStep(1);
-                    }}/>}
+                    }} />}
 
-                    {activeStep === 1 && (
+                    {activeStep === 1 && data.type == "socket" && (
                         <Fragment>
                             <div className="grid grid-cols-2 pt-10">
 
-                                <div>Name</div>
-                                <TextField />
+                                NOT SUPPORTED YET
 
                             </div>
 
@@ -97,9 +97,20 @@ export default function () {
                                     Next
                                 </Button>
                             </Box>
-                            
+
                         </Fragment>
                     )}
+
+                    {activeStep === 1 && data.type === "api" &&
+                        <EnvironmentApiStep
+                            onNext={() => {
+                                setActiveStep(2);
+                            }} 
+                            onPrev={() => {
+                                setActiveStep(0);
+                            }}
+                        />
+                    }
 
                     {activeStep === 3 && (
                         <Fragment>
