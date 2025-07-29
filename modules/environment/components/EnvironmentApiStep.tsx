@@ -16,15 +16,46 @@ type EnvironmentApiData = {
 
 export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
 
+    const [isValidName, setIsValidName] = useState(true);
+    const [isValidHost, setIsValidHost] = useState(true);
+    const [isValidPort, setIsValidPort] = useState(true);
     const [data, setData] = useState<EnvironmentApiData>({
         name: "",
         host: "",
         port: 0
     })
 
+    const validate = (): boolean => {
+
+        let result = true;
+
+        if(data.name.trim().length == 0) {
+            setIsValidName(false);
+            result = false;
+        } else {
+            setIsValidName(true);
+        }
+
+        if(data.host.trim().length == 0) {
+            setIsValidHost(false);
+            result = false;
+        } else {
+            setIsValidHost(true);
+        }
+        
+        if(data.port < 1 || data.port > 65535 || !data.port) {
+            setIsValidPort(false);
+            result = false;
+        } else {
+            setIsValidPort(true);
+        }
+
+        return result;
+    }
+
     return (
         <Fragment>
-            <div className="grid grid-cols-2 pt-10">
+            <div className="grid grid-cols-2 gap-4 pt-10">
 
                 <div>Name</div>
                 <TextField onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +63,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
                         ...data,
                         name: event.target.value
                     })
-                }}/>
+                }} error={!isValidName}/>
 
                 <div>Host</div>
                 <TextField onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +71,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
                         ...data,
                         host: event.target.value
                     })
-                }}/>
+                }} error={!isValidHost}/>
 
                 <div>Port</div>
                 <TextField type="number" onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +79,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
                         ...data,
                         port: parseInt(event.target.value)
                     })
-                }}/>
+                }} error={!isValidPort}/>
 
             </div>
 
@@ -64,6 +95,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={() => {
+                    if(validate() === false) return;
                     props.onNext?.(data);
                 }}>
                     Next
