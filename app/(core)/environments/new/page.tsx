@@ -2,11 +2,12 @@
 
 import EnvironmentApiStep from "@/modules/environment/components/EnvironmentApiStep";
 import EnvironmentConnectionTypeSelector from "@/modules/environment/components/EnvironmentConnectionTypeSelector";
+import EnvironmentSummaryStep from "@/modules/environment/components/EnvironmentSummaryStep";
 import { Api, Save } from "@mui/icons-material";
 import { Box, Button, Card, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
-type NewEnvironmentData = {
+export type NewEnvironmentData = {
     type: "socket" | "api" | "secure-api",
     name: string,
     socket?: string,
@@ -19,7 +20,7 @@ type NewEnvironmentData = {
     version?: string
 }
 
-export default function () {
+export default function NewEnvironmentPage() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set<number>())
@@ -36,13 +37,25 @@ export default function () {
         setSkipped(newSkipped);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    const handleFinish = () => {
+        fetch("/api/environments", {
+            method: "POST",
+            body: JSON.stringify({
+                data
+            })
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                alert("added")
+            })
+            .catch((err) => {
+                alert("error");
+            })
+    }
 
     return (
         <div className="w-full h-full flex flex-col items-center gap-5">
@@ -103,8 +116,12 @@ export default function () {
 
                     {activeStep === 1 && data.type === "api" &&
                         <EnvironmentApiStep
-                            onNext={() => {
+                            onNext={(stepData) => {
                                 setActiveStep(2);
+                                setData({
+                                    ...data,
+                                    ...stepData
+                                })
                             }} 
                             onPrev={() => {
                                 setActiveStep(0);
@@ -112,17 +129,7 @@ export default function () {
                         />
                     }
 
-                    {activeStep === 3 && (
-                        <Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>
-                                All steps completed - you&apos;re finished
-                            </Typography>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                <Box sx={{ flex: '1 1 auto' }} />
-                                <Button onClick={handleReset} variant="outlined" color="success">Finish</Button>
-                            </Box>
-                        </Fragment>
-                    )}
+                    {activeStep === 2 && <EnvironmentSummaryStep data={data} onPrev={() => setActiveStep(1)} onFinish={handleFinish} />}
                 </div>
             </div>
         </div>
