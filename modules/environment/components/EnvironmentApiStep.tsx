@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Button, TextField } from "@mui/material"
-import { Fragment, useState } from "react"
+import { ChangeEvent, Fragment, useState } from "react"
 
 type EnvironmentApiStepProps = {
     onNext?: (data: EnvironmentApiData) => void,
@@ -9,13 +9,15 @@ type EnvironmentApiStepProps = {
 }
 
 type EnvironmentApiData = {
+    name: string,
     host: string,
     port: number
 }
 
-export default function (props: EnvironmentApiStepProps) {
+export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
 
     const [data, setData] = useState<EnvironmentApiData>({
+        name: "",
         host: "",
         port: 0
     })
@@ -24,11 +26,29 @@ export default function (props: EnvironmentApiStepProps) {
         <Fragment>
             <div className="grid grid-cols-2 pt-10">
 
+                <div>Name</div>
+                <TextField onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    setData({
+                        ...data,
+                        name: event.target.value
+                    })
+                }}/>
+
                 <div>Host</div>
-                <TextField />
+                <TextField onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    setData({
+                        ...data,
+                        host: event.target.value
+                    })
+                }}/>
 
                 <div>Port</div>
-                <TextField />
+                <TextField type="number" onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    setData({
+                        ...data,
+                        port: parseInt(event.target.value)
+                    })
+                }}/>
 
             </div>
 
@@ -44,7 +64,7 @@ export default function (props: EnvironmentApiStepProps) {
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={() => {
-                    props.onNext?.();
+                    props.onNext?.(data);
                 }}>
                     Next
                 </Button>
