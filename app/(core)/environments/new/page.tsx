@@ -5,6 +5,7 @@ import EnvironmentConnectionTypeSelector from "@/modules/environment/components/
 import EnvironmentSummaryStep from "@/modules/environment/components/EnvironmentSummaryStep";
 import { Api, Save } from "@mui/icons-material";
 import { Box, Button, Card, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 
 export type NewEnvironmentData = {
@@ -24,6 +25,7 @@ export default function NewEnvironmentPage() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set<number>())
+    const router = useRouter();
 
     const [data, setData] = useState<NewEnvironmentData>({
         type: "socket",
@@ -45,12 +47,23 @@ export default function NewEnvironmentPage() {
         fetch("/api/environments", {
             method: "POST",
             body: JSON.stringify({
-                data
+                name: data.name,
+                host: data.host,
+                port: data.port,
+                version: data.version,
+                ca: data.ca,
+                key: data.key,
+                cert: data.cert,
+                protocol: data.protocol,
+                socket: data.socket
             })
         })
-            .then((res) => res.json())
-            .then((data) => {
-                alert("added")
+            .then((res) => {
+                if(res.status === 201) {
+                    router.push('/environments');
+                } else {
+                    alert('error');
+                }
             })
             .catch((err) => {
                 alert("error");
