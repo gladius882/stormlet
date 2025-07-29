@@ -29,7 +29,7 @@ export default function (props: EnvironmentsListProps) {
                     }
                 }}
                 onClick={() => {
-                    redirect('/environments/add');
+                    redirect('/environments/new');
                 }}
             >
             </SpeedDial>
