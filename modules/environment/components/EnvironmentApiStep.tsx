@@ -86,6 +86,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                 <Button
                     color="inherit"
+                    variant="outlined"
                     onClick={() => {
                         props.onPrev?.();
                     }}
@@ -94,7 +95,7 @@ export default function EnvironmentApiStep(props: EnvironmentApiStepProps) {
                     Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={() => {
+                <Button variant="outlined" color="success" onClick={() => {
                     if(validate() === false) return;
                     props.onNext?.(data);
                 }}>

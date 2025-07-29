@@ -84,12 +84,13 @@ export default function (props: EnvironmentConnectionTypeSelectorProps) {
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                 <Button
                     color="inherit"
+                    variant="outlined"
                     disabled={true}
                 >
                     Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={() => {
+                <Button variant="outlined" color="success" onClick={() => {
                     props.onNext?.(type);
                 }}>
                     Next
