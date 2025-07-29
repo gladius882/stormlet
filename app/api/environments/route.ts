@@ -1,5 +1,6 @@
 import { PrismaClient } from "@/app/generated/prisma";
 import { EnvironmentType } from "@/modules/environment/types";
+import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async (req: Request) => {
@@ -13,9 +14,9 @@ export const GET = async (req: Request) => {
 
 export const POST = async (req: NextRequest) => {
     const prisma = new PrismaClient();
-    const body = await req.body as Partial<EnvironmentType>;
+    const body = await req.json() as Partial<EnvironmentType>;
 
-    if(!body.name) {
+    if (!body.name) {
         return NextResponse.json({
             error: true,
             message: "There is no `name` property in body"
@@ -30,10 +31,14 @@ export const POST = async (req: NextRequest) => {
         }
     })
 
-    if(!result) {
+    if (!result) {
         return NextResponse.json({
             error: true,
             message: "Error while adding new environment"
         })
     }
+
+    return NextResponse.json({ ...result }, {
+        status: 201
+    });
 }
