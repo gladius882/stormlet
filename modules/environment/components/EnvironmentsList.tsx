@@ -4,7 +4,7 @@ import { Button, Card, SpeedDial } from "@mui/material"
 import { EnvironmentType } from "../types"
 import Link from "next/link"
 import { Add, Cloud, Key } from "@mui/icons-material"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 
 type EnvironmentsListProps = {
     items: EnvironmentType[]
@@ -12,6 +12,16 @@ type EnvironmentsListProps = {
 
 export default function (props: EnvironmentsListProps) {
 
+    const router = useRouter();
+
+    const handleDeleteEnvironment = (id: string) => {
+        fetch(`/api/environments/${id}`, {
+            method: "DELETE"
+        })
+        .then(data => router.refresh())
+        .catch(err => console.log(err));
+    }
+    
     return (
         <>
             <SpeedDial
@@ -55,7 +65,8 @@ export default function (props: EnvironmentsListProps) {
                         </div>
 
                         <div className="w-calc(1/8-100px)">
-                            <Button variant="outlined" color="error">Delete</Button>
+                            <Button variant="outlined" color="error" onClick={() => handleDeleteEnvironment(e.id)}>Delete</Button>
+                            <Button variant="outlined" color="primary">Edit</Button>
                         </div>
                     </Card>
                 )
