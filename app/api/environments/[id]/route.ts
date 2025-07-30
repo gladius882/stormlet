@@ -12,16 +12,17 @@ export async function DELETE(
 
     const prisma = new PrismaClient();
 
-    const result = await prisma.environment.delete({
-        where: {
-            id: parseInt(id)
-        }
-    })
-
-    if(!result) {
+    try {
+        const result = await prisma.environment.delete({
+            where: {
+                id: parseInt(id)
+            }
+        })
+    } catch(err) {
         return NextResponse.json({
-            error: true,
-            message: `Cant' delete encironment #${id}`
+            ...err
+        }, {
+            status: err.code === "P2025" ? 404 : 400
         })
     }
 
