@@ -20,6 +20,16 @@ model User {
   login String
   password String
   email String
+  tokens PersonalToken[]
+}
+
+model PersonalToken {
+  id Int @id @default(autoincrement())
+  name String?
+  token String
+  expires_at DateTime?
+  user_id Int
+  user User @relation(fields: [user_id], references: [id])
 }
 
 model Environment {
