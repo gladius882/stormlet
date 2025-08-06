@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@/app/generated/prisma";
+import { signToken } from "@/lib/jwt";
 
 export async function POST(req: Request) {
     const body = await req.json();
@@ -27,12 +28,12 @@ export async function POST(req: Request) {
     })
 
     if (user) {
-        return NextResponse.json({ error: "User if that login already exist" }, { status: 400 });
+        return NextResponse.json({ error: "User with that login already exist" }, { status: 400 });
     }
 
     const hashed = await bcrypt.hash(password, 10);
 
-    await prisma.user.create({
+    const createdUser = await prisma.user.create({
         data: {
             name: login,
             email: email,
@@ -41,5 +42,26 @@ export async function POST(req: Request) {
         }
     })
 
-    return NextResponse.json({ success: true });
+    const token = signToken({
+        login,
+        email,
+    }, undefined)
+
+    await prisma.personalToken.create({
+        data: {
+            name: "default",
+            token: token,
+            expires_at: null,
+            user_id: createdUser.id
+        }
+    })
+
+    return NextResponse.json({
+            user: {
+                ...createdUser
+            },
+            token
+        },
+        { status: 201 }
+    );
 }
