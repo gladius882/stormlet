@@ -1,23 +1,10 @@
 "use server"
 
 import { PrismaClient } from "@/app/generated/prisma";
-import { requireBearerToken } from "@/lib/auth-api";
-import { signToken } from "@/lib/jwt";
-import Docker from "dockerode"
-import { NextApiRequest } from "next"
 import { NextRequest, NextResponse } from "next/server"
+import Docker from "dockerode"
 
 export async function GET(req: NextRequest) {
-
-	// const authResult = requireBearerToken(req);
-
-	// console.log(authResult);
-
-	// if(authResult.success === false) {
-	// 	return NextResponse.json({
-	// 		message: "Invalid or missing credentials"
-	// 	}, { status: 401 })
-	// }
 
 	const params = req.nextUrl.searchParams;
 
@@ -50,6 +37,6 @@ export async function GET(req: NextRequest) {
 		port: env.port as number
 	})
 
-	const containers = await docker.listContainers()
-	return NextResponse.json(containers)
+	const info = await docker.info()
+	return NextResponse.json(info)
 }
