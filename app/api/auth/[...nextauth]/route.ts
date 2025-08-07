@@ -47,6 +47,13 @@ const handler = NextAuth({
             },
         }),
     ],
+    callbacks: {
+        async session({session}) {
+
+            session.user.token = "sadasd";
+            return session;
+        }
+    },
     session: {
         strategy: "jwt",
     },
