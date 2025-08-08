@@ -48,9 +48,21 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
-        async session({session}) {
+        async session({session, token}) {
 
-            session.user.token = "sadasd";
+            const prisma = new PrismaClient();
+            prisma.$connect();
+
+            const personalToken = await prisma.personalToken.findFirst({
+                where: {
+                    user_id: token.id
+                }
+            })
+
+            if(!personalToken) return session;
+
+            session.token = personalToken.token;
+
             return session;
         }
     },
