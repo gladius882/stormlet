@@ -1,6 +1,11 @@
 import { signToken } from "@/lib/jwt";
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/lib/nextAuthOptions";
 
-export const listEnvironments = async() => {
+export const listEnvironments = async () => {
+
+    const session = await getServerSession(nextAuthOptions);
+    console.log({ session })
 
     const headers = new Headers();
     headers.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImxvZ2luIjoiYWRtaW4iLCJpYXQiOjE3NTM4OTYyNDQsImV4cCI6MTc1Mzg5OTg0NH0.9U0nLVgoSnZEWk5JRQLvaTnKMOJgdIwt-AauU4CWSvI")
