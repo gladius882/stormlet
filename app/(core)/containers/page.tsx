@@ -1,10 +1,12 @@
 "use client"
 
+import { Card } from "@mui/material"
+import { ContainerInfo } from "dockerode"
 import { useEffect, useState } from "react"
 
 export default function ContainersList() {
 
-    const [containers, setContainers] = useState()
+    const [containers, setContainers] = useState<ContainerInfo[]>([])
 
     useEffect(() => {
         fetch(`/api/containers?env=2`)
@@ -14,11 +16,20 @@ export default function ContainersList() {
     }, [])
 
     return (
-        <div>
+        <div className="text-black">
             Containers
 
-            <div>
-                {JSON.stringify(containers)}
+            <div className="">
+                {containers.map(c => {
+                    return (
+                        <Card key={c.Id}>
+                            <div>{c.Names[0]}</div>
+                            <div>{c.Mounts.length}</div>
+                            <div>{c.State}</div>
+                            <div>{c.Status}</div>
+                        </Card>
+                    )
+                })}
             </div>
         </div>
     )
