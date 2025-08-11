@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { AuthOptions } from "next-auth";
 
-export const nextAuth = {
+export const nextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -50,37 +50,53 @@ export const nextAuth = {
     callbacks: {
         async session({ session, token }) {
 
-            const prisma = new PrismaClient();
-            prisma.$connect();
+            try {
+                const prisma = new PrismaClient();
+                prisma.$connect();
 
-            const personalToken = await prisma.personalToken.findFirst({
-                where: {
-                    user_id: parseInt(token.id)
-                }
-            })
+                console.log({
+                    session, token
+                })
 
-            if (!personalToken) return session;
+                const personalToken = await prisma.personalToken.findFirst({
+                    where: {
+                        user_id: parseInt(token.id)
+                    }
+                })
 
-            session.token = personalToken.token;
+                if (!personalToken) return session;
 
-            return session;
+                session.token = personalToken.token;
+
+                return session;
+            }
+            catch (err) {
+                console.error("Session callback error:", err);
+                return session;
+            }
         },
         async jwt({ token, user }) {
 
-            const prisma = new PrismaClient();
-            prisma.$connect();
+            try {
+                const prisma = new PrismaClient();
+                prisma.$connect();
 
-            if (user) {
-                const personalToken = await prisma.personalToken.findFirst({
-                    where: {
-                        user_id: token.id
-                    }
-                })
-                token.id = user.id;
-                token.token = personalToken?.token || null
+                if (user) {
+                    const personalToken = await prisma.personalToken.findFirst({
+                        where: {
+                            user_id: token.id
+                        }
+                    })
+                    token.id = user.id;
+                    token.token = personalToken?.token || null
+                }
+
+                return token;
             }
-
-            return token;
+            catch (err) {
+                console.error("JWT callback error:", err);
+                return token;
+            }
         }
     },
     session: {
