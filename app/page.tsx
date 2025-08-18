@@ -34,44 +34,46 @@ export default function Home() {
 	}
 
 	return (
-		<div className="h-[100vh] flex flex-col items-center py-10">
-			<Image width={200} src={logo} alt="sdad" className="mb-10" />
+		<div className="h-[100vh] flex items-center justify-center">
 
-			<div className="w-1/4 shadow-md flex flex-col p-5 items-center gap-5">
+			<div className="flex flex-col gap-5 bg-[#060B16] items-center p-10 rounded-3xl w-[400px]">
+				<Image width={200} src={logo} alt="sdad" className="mb-10" />
 
-				<TextField
+
+				<input
 					id="outlined-controlled"
-					label="Login"
 					value={login}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 						setLogin(event.target.value);
 					}}
-					className="w-full"
+					placeholder="Login"
+					className="w-full bg-white p-2 rounded-md placeholder-[#4E4E4E] text-[#1E1E1E]"
 				/>
 
-				<TextField
+				<input
 					id="outlined-controlled"
 					type="password"
-					label="Password"
 					value={password}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 						setPassword(event.target.value);
 					}}
-					className="w-full"
+					placeholder="Password"
+					className="w-full bg-white p-2 rounded-md placeholder-[#4E4E4E] text-[#1E1E1E]"
 				/>
 
 
-				<Button onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+				<button onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
 					handleSignIn();
-				}} className="w-full" variant="contained" color="success">
-					Sing in
+				}} 
+					className="w-full bg-[#114B47] p-2 rounded-md">
+					Unleash a storm
 					{isLoading && "..."}
-				</Button>
+				</button>
 
-				<div className="w-full">
-					<p>{status}</p>
-					{JSON.stringify(session)}
-				</div>
+				{/* <div className="w-full">
+						<p>{status}</p>
+						{JSON.stringify(session)}
+					</div> */}
 
 				{isError && (
 					<Alert severity="error" className="w-full" >
@@ -79,6 +81,7 @@ export default function Home() {
 					</Alert>
 				)}
 			</div>
+
 		</div>
 	);
 }
