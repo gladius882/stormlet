@@ -8,7 +8,7 @@ export default function Layout({
     children: React.ReactNode;
 }>) {
     return (
-        <div className="flex min-w-[100vw] min-h-[100vh]">
+        <div className="flex min-w-[100vw] min-h-[100vh] p-[30px] gap-[30px]">
             <SidebarNavigation />
 
             <div className="flex flex-col w-full">
@@ -17,7 +17,7 @@ export default function Layout({
                     <UserDropdown />
                 </div>
 
-                <main className="bg-gray-50 h-full">
+                <main className="h-full">
                     {children}
                 </main>
 
