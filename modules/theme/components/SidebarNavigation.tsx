@@ -5,6 +5,7 @@ import { Divider } from "@mui/material";
 import SidebarItem from "./SidebarItem";
 
 export default function SidebarNavigation() {
+    
     return (
         <nav className="w-[350px] flex flex-col bg-[#060B16] rounded-[30px] gap-2 px-3 py-5">
             <div className="self-center mb-5">
@@ -21,6 +22,8 @@ export default function SidebarNavigation() {
             <Divider></Divider>
 
             <SidebarItem href="/environments" text="Environments" />
+            <SidebarItem href="/tools" text="Tools" />
+            <SidebarItem href="/settings" text="Settings" />
         </nav>
     )
 }
