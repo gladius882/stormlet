@@ -1,9 +1,6 @@
-import { PrismaClient } from "@/app/generated/prisma";
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
-import { nextAuth } from "@/lib/nextAuthOptions";
+import { nextAuthOptions } from "@/lib/nextAuthOptions";
 
-const handler = NextAuth(nextAuth)
+const handler = NextAuth(nextAuthOptions)
 
 export { handler as GET, handler as POST }
