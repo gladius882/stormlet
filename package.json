@@ -17,6 +17,7 @@
     "@types/dockerode": "^3.3.42",
     "@types/next-auth": "^3.13.0",
     "bcrypt": "^6.0.0",
+    "clsx": "^2.1.1",
     "dockerode": "^4.0.7",
     "jsonwebtoken": "^9.0.2",
     "next": "15.4.4",
