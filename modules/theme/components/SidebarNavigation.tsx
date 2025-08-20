@@ -4,6 +4,7 @@ import Link from "next/link";
 import logo from "@/images/logo-transparent.png"
 import { Divider } from "@mui/material";
 import EnvironmentSelector from "@/modules/environment/components/EnvironmentSelector";
+import SidebarItem from "./SidebarItem";
 
 export default function SidebarNavigation() {
     return (
@@ -14,27 +15,14 @@ export default function SidebarNavigation() {
 
             <Divider />
 
-            <Link href="/dashboard" className="rounded-full p-2 font-bold text-center hover:bg-emerald">
-                <span className="text-gray-200">Dashboard</span>
-            </Link>
-            <Link href="/containers" className="rounded-full p-2 font-bold text-center">
-                <span className="text-gray-200">Containers</span>
-            </Link>
-            <Link href="/images" className="rounded-full p-2 font-bold text-center">
-                <span className="text-gray-200">Images</span>
-            </Link>
-            <Link href="/volumes" className="rounded-full p-2 font-bold text-center">
-                <span className="text-gray-200">Volumes</span>
-            </Link>
-            <Link href="/networks" className="rounded-full p-2 font-bold text-center">
-                <span className="text-gray-200">Networks</span>
-            </Link>
+            <SidebarItem href="/dashboard" text="Dashboard" />
+            <SidebarItem href="/containers" text="Containers" />
+            <SidebarItem href="/volumes" text="Volumes" />
+            <SidebarItem href="/networks" text="Networks" />
 
             <Divider></Divider>
 
-            <Link href="/environments" className="rounded-full p-2 font-bold text-center">
-                <span className="text-gray-200">Environments</span>
-            </Link>
+            <SidebarItem href="/environments" text="Environments" />
         </nav>
     )
 }
