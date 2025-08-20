@@ -20,10 +20,6 @@ export default function Layout({
                 <main className="h-full">
                     {children}
                 </main>
-
-                <footer>
-                    footer
-                </footer>
             </div>
         </div>
     );
