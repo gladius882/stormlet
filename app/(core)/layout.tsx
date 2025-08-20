@@ -1,6 +1,7 @@
 import EnvironmentSelector from "@/modules/environment/components/EnvironmentSelector";
 import UserDropdown from "@/modules/profile/components/UserDropdown";
 import SidebarNavigation from "@/modules/theme/components/SidebarNavigation";
+import TopMenu from "@/modules/theme/components/TopMenu";
 
 export default function Layout({
     children,
@@ -12,10 +13,7 @@ export default function Layout({
             <SidebarNavigation />
 
             <div className="flex flex-col w-full">
-
-                <div className="sticky bg-emerald-800 text-gray-50 flex items-center justify-between px-5">
-                    <UserDropdown />
-                </div>
+                <TopMenu />
 
                 <main className="h-full">
                     {children}
