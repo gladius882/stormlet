@@ -1,17 +1,23 @@
 "use client"
 
 import { SearchOutlined } from "@mui/icons-material";
+import clsx from "clsx";
 import { useState } from "react"
 
 type InputTexpProps = {
-    icon?: React.ReactNode
+    icon?: React.ReactNode,
+    className?: string,
+    placeholder?: string
 }
 
-export default function ({ icon }: InputTexpProps) {
+export default function ({ icon, className, placeholder }: InputTexpProps) {
     const [value, setValue] = useState("");
 
     return (
-        <div className="flex">
+        <div className={clsx(
+            "flex gap-2 items-center bg-[#060B16] p-3 text-xl rounded-xl",
+            className
+        )}>
 
             <div>
                 {icon}
@@ -20,7 +26,8 @@ export default function ({ icon }: InputTexpProps) {
             <input
                 type="text"
                 onChange={(event) => setValue(event.target.value)}
-                className=""
+                className="outline-0"
+                placeholder={placeholder}
             />
         </div>
     )

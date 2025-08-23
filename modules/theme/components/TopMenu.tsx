@@ -5,8 +5,11 @@ import { SearchOutlined } from "@mui/icons-material";
 
 export default async function() {
     return (
-        <div className="flex">
-            <InputText icon={<SearchOutlined />}/>
+        <div className="flex gap-5">
+            <InputText 
+                icon={<SearchOutlined />}
+
+            />
             <EnvironmentSelector />
             <UserDropdown />
         </div>
