@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { EnvironmentType } from "../types";
+import Select from "@/modules/common/components/form/Select";
 
 export default function EnvironmentSelector() {
 
@@ -20,14 +21,12 @@ export default function EnvironmentSelector() {
 
     return (
         <div className="flex gap-2 items-center min-w-[240px]">
-            <select className="bg-emerald-300 h-full w-full text-gray-900 rounded-sm p-2">
-                {envs.length === 0 && <option key={0} value="0">NO ENVIRONMENT</option>}
-                {envs.map(e => {
-                    return (
-                        <option key={e.id} value={e.id}>{e.name}</option>
-                    )
-                })}
-            </select>
+            <Select options={envs.map(e => {
+                return {
+                    key: e.name,
+                    value: e.id
+                }
+            })} />
         </div>
     )
 }
