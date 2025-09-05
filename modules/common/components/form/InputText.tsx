@@ -26,7 +26,7 @@ export default function ({ icon, className, placeholder }: InputTexpProps) {
             <input
                 type="text"
                 onChange={(event) => setValue(event.target.value)}
-                className="outline-0"
+                className="outline-0 w-full"
                 placeholder={placeholder}
             />
         </div>
