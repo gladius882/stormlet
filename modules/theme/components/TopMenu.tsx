@@ -8,7 +8,7 @@ export default async function() {
         <div className="flex gap-5">
             <InputText 
                 icon={<SearchOutlined />}
-
+                placeholder="Search"
             />
             <EnvironmentSelector />
             <UserDropdown />
